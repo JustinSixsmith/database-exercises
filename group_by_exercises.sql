@@ -1,7 +1,7 @@
 use justin;
 
 select distinct title
-from titles
+from titles;
 
 select last_name
 from employees
