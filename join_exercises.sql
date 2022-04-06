@@ -38,6 +38,20 @@ from employees
               on dept_emp.dept_no = departments.dept_no
          join titles
               on employees.emp_no = titles.emp_no
-where dept_emp.to_date = '9999-01-01' and dept_name like 'customer service'
+where dept_emp.to_date = '9999-01-01'
+  and titles.to_date = '9999-01-01'
+  and dept_name like 'customer service'
 group by title
 order by total desc;
+
+
+select dept_name, concat(first_name, ' ', last_name) as department_manager, salary
+from departments
+         join dept_manager
+              on departments.dept_no = dept_manager.dept_no
+         join employees
+              on employees.emp_no = dept_manager.emp_no
+         join salaries
+              on employees.emp_no = salaries.emp_no
+where dept_manager.to_date = '9999-01-01'
+  and salaries.to_date = '9999-01-01';
