@@ -1,15 +1,5 @@
 use justin;
 
-describe employees;
-
-describe departments;
-
-describe dept_emp;
-
-describe dept_manager;
-
-describe salaries;
-
 
 select departments.dept_name, concat(first_name, ' ', last_name) as department_manager
 from departments
@@ -55,3 +45,19 @@ from departments
               on employees.emp_no = salaries.emp_no
 where dept_manager.to_date = '9999-01-01'
   and salaries.to_date = '9999-01-01';
+
+
+select concat(first_name, ' ', last_name) as employee,
+       dept_name,
+       concat(first_name, ' ', last_name) as department_manager
+from employees
+         join dept_emp
+              on employees.emp_no = dept_emp.emp_no
+         join departments
+              on dept_emp.dept_no = departments.dept_no
+         join dept_manager
+              on departments.dept_no = dept_manager.dept_no
+where dept_emp.to_date = '9999-01-01'
+  and dept_manager.to_date = '9999-01-01'
+union select concat(first_name, ' ', last_name) as department_manager
+from employees;
